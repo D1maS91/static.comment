@@ -57,7 +57,11 @@ $arComponentParameters = array(
         "RIGHTS"    =>  array(
             "NAME"  =>  "Права",
             "SORT"  =>  "200",
-        )
+        ),
+        "ADDITIONAL"    =>  array(
+            "NAME"  =>  "Дополнительные настройки",
+            "SORT"  =>  "300",
+        ),
     ),
     "PARAMETERS" => array(
         "IBLOCK_TYPE"   =>  array(
@@ -97,6 +101,12 @@ $arComponentParameters = array(
             "VALUES"    =>  $paramGroups,
             "MULTIPLE"  =>  "Y",
         ),
+        "MODERATION"    =>  array(
+            "PARENT"    =>  "ADDITIONAL",
+            "NAME"      =>  "Комментарии должны проходить модерацию",
+            "TYPE"      =>  "CHECKBOX",
+            "DEFAULT"   =>  "N"
+        )
     ),
 );
 ?>

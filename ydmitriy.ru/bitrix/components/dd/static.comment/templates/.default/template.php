@@ -1,13 +1,17 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 ?>
-
+<!--версткой заниматься я не буду-->
 <?if ($arResult["CAN_WRITE"] == "Y"):?>
     <form method="POST">
         <table>
             <tr>
-                <td></td>
-                <td><textarea name="comment"></textarea></td>
+                <td>Имя: </td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>Текст: </td>
+                <td><textarea type="text" name="comment"></textarea></td>
             </tr>
             <tr>
                 <td></td>
