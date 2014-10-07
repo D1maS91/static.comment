@@ -19,6 +19,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
             </tr>
         </table>
     </form>
+    <hr>
 <?endif;?>
 
 <?foreach ($arResult["ITEMS"] as $comment):?>
@@ -27,10 +28,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
             <?=$comment["NAME"]?>
         </div>
         <div>
-            <?=$comment["TIMESTAMP_X"]?>
+            <?=$comment["TIME"]?> <?=$comment["DATE"]?>
         </div>
         <div>
-            <?=$comment["DETAIL_TEXT"]?>
+            <?=$comment["TEXT"]?>
         </div>
     </div>
+    <hr>
 <?endforeach?>

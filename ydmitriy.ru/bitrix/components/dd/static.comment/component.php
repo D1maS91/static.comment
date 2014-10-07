@@ -1,14 +1,14 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-//TODO:вынести в lang файлы
+
     if (!CModule::IncludeModule("iblock"))
     {
-        ShowError("Модуль iblock не установлен");
+        ShowError(GetMessage("IBLOCK_ERROR"));
         return false;
     }
 
     if (!$arParams["IBLOCK_ID"])
     {
-        ShowError("Инфоблок не определен");
+        ShowError(GetMessage("IBLOCK_ID_ERROR"));
         return false;
     }
 
@@ -29,22 +29,22 @@ if (count(array_intersect($currentUserGroups, $arParams["WRITE_USER_GROUPS"])) >
             $arParams["PAGE_PROPERTY"] => $page_url
         );
         $arLoadArray = Array(
-            "MODIFIED_BY"    => $USER->GetID(),
+            "MODIFIED_BY"       => $USER->GetID(),
             "IBLOCK_SECTION_ID" => false,
-            "IBLOCK_ID"      => $arParams["IBLOCK_ID"],
-            "PROPERTY_VALUES"=> $properties,
-            "NAME"           => $_POST["name"],
-            "ACTIVE"         => $arParams["MODERATION"],
-            "DETAIL_TEXT"    => $_POST["comment"],
+            "IBLOCK_ID"         => $arParams["IBLOCK_ID"],
+            "PROPERTY_VALUES"   => $properties,
+            "NAME"              => $_POST["name"],
+            "ACTIVE"            => ($arParams["MODERATION"] == "Y") ? "N":"Y",
+            "DETAIL_TEXT"       => $_POST["comment"],
         );
         if ($ID = $comment->Add($arLoadArray))
         {
             if ($arParams["MODERATION"] == "Y")
-                ShowNote("Комментарий будет добавлен после модерации");
+                ShowNote(GetMessage("MODERATION_NOTE"));
             else
-                ShowNote("Комментарий успешно добавлен");
+                ShowNote(GetMessage("OK_NOTE"));
         } else {
-            ShowMessage("Ошибка при добавлении комментария");
+            ShowMessage(GetMessage("ERROR_NOTE"));
         }
     }
 
@@ -56,7 +56,7 @@ if (count(array_intersect($currentUserGroups, $arParams["WRITE_USER_GROUPS"])) >
 //проверка групп пользователей
     if (count(array_intersect($currentUserGroups, $arParams["READ_USER_GROUPS"])) < 1)
     {
-        ShowError("Нет прав для просмотра комментариев");
+        ShowError(GetMessage("RULES_ERROR"));
         return false;
     }
 
@@ -81,7 +81,13 @@ if (count(array_intersect($currentUserGroups, $arParams["WRITE_USER_GROUPS"])) >
     );
     while ($arComments = $dbComments->GetNext())
     {
-        $arResult["ITEMS"][] = $arComments;
+        $arResult["ITEMS"][] = array(
+            "ID"    =>  $arComments["ID"],
+            "NAME"  =>  $arComments["NAME"],
+            "TEXT"  =>  $arComments["DETAIL_TEXT"],
+            "TIME"  =>  substr($arComments["TIMESTAMP_X"], 11, 5),
+            "DATE"  =>  substr($arComments["TIMESTAMP_X"], 0, 10)
+        );
     }
 
     $this->IncludeComponentTemplate();

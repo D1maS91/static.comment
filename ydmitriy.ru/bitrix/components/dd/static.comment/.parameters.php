@@ -1,10 +1,9 @@
 <?
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
-
 if (!CModule::IncludeModule("iblock"))
 {
-    ShowMessage("Модуль iblock не установлен");
+    ShowMessage(GetMessage("IBLOCK_ERROR"));
     return false;
 }
 //получение списка типов инфоблоков
@@ -55,18 +54,18 @@ while ($arGroups = $dbGroups->Fetch())
 $arComponentParameters = array(
     "GROUPS" => array(
         "RIGHTS"    =>  array(
-            "NAME"  =>  "Права",
+            "NAME"  =>  GetMessage("RULES"),
             "SORT"  =>  "200",
         ),
         "ADDITIONAL"    =>  array(
-            "NAME"  =>  "Дополнительные настройки",
+            "NAME"  =>  GetMessage("ADDITIONAL"),
             "SORT"  =>  "300",
         ),
     ),
     "PARAMETERS" => array(
         "IBLOCK_TYPE"   =>  array(
             "PARENT"    =>  "BASE",
-            "NAME"      =>  "Тип инфоблока комментариев",
+            "NAME"      =>  GetMessage("IBLOCK_TYPE"),
             "TYPE"      =>  "LIST",
             "VALUES"    =>  $paramIBlockTypes,
             "REFRESH"   =>  "Y",
@@ -74,7 +73,7 @@ $arComponentParameters = array(
         ),
         "IBLOCK_ID" =>  array(
             "PARENT"    =>  "BASE",
-            "NAME"      =>  "Инфоблок комментариев",
+            "NAME"      =>  GetMessage("IBLOCK_ID"),
             "TYPE"      =>  "LIST",
             "VALUES"    =>  $paramIBlocks,
             "REFRESH"   =>  "Y",
@@ -82,28 +81,28 @@ $arComponentParameters = array(
         ),
         "PAGE_PROPERTY" =>  array(
             "PARENT"    =>  "BASE",
-            "NAME"      =>  "Свойство, хранящее комментируемую страницу",
+            "NAME"      =>  GetMessage("PAGE_PROPERTY"),
             "TYPE"      =>  "LIST",
             "VALUES"    =>  $paramProperties,
             "MULTIPLE"  =>  "N"
         ),
         "READ_USER_GROUPS"  =>  array(
             "PARENT"    =>  "RIGHTS",
-            "NAME"      =>  "Группы пользователей, просматривающие коментарии",
+            "NAME"      =>  GetMessage("READ_USER_GROUPS"),
             "TYPE"      =>  "LIST",
             "VALUES"    =>  $paramGroups,
             "MULTIPLE"  =>  "Y",
         ),
         "WRITE_USER_GROUPS"  =>  array(
             "PARENT"    =>  "RIGHTS",
-            "NAME"      =>  "Группы пользователей, добавляющие комментарии",
+            "NAME"      =>  GetMessage("WRITE_USER_GROUP"),
             "TYPE"      =>  "LIST",
             "VALUES"    =>  $paramGroups,
             "MULTIPLE"  =>  "Y",
         ),
         "MODERATION"    =>  array(
             "PARENT"    =>  "ADDITIONAL",
-            "NAME"      =>  "Комментарии должны проходить модерацию",
+            "NAME"      =>  GetMessage("MODERATION"),
             "TYPE"      =>  "CHECKBOX",
             "DEFAULT"   =>  "N"
         )

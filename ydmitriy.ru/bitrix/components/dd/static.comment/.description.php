@@ -2,7 +2,7 @@
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 $arComponentDescription = array(
-    "NAME" => "Комментирование статических страниц",
+    "NAME" => GetMessage("NAME"),
     "DESCRIPTION" => "",
     "ICON" => "/images/icon.gif",
     "SORT" => 10,
