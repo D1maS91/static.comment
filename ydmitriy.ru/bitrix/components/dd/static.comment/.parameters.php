@@ -88,7 +88,7 @@ $arComponentParameters = array(
         ),
         "READ_USER_GROUPS"  =>  array(
             "PARENT"    =>  "RIGHTS",
-            "NAME"      =>  GetMessage("READ_USER_GROUPS"),
+            "NAME"      =>  GetMessage("READ_USER_GROUP"),
             "TYPE"      =>  "LIST",
             "VALUES"    =>  $paramGroups,
             "MULTIPLE"  =>  "Y",
