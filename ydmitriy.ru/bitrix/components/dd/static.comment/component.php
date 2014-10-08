@@ -33,7 +33,7 @@ if (count(array_intersect($currentUserGroups, $arParams["WRITE_USER_GROUPS"])) >
             "IBLOCK_SECTION_ID" => false,
             "IBLOCK_ID"         => $arParams["IBLOCK_ID"],
             "PROPERTY_VALUES"   => $properties,
-            "NAME"              => $_POST["name"],
+            "NAME"              => $_SESSION["SESS_AUTH"]["NAME"],
             "ACTIVE"            => ($arParams["MODERATION"] == "Y") ? "N":"Y",
             "DETAIL_TEXT"       => $_POST["comment"],
         );
